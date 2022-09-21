@@ -1,0 +1,62 @@
+diff --git a/src/Collections/CollectionRepository.php b/src/Collections/CollectionRepository.php
+index 25cb76d..8c9e957 100644
+--- a/src/Collections/CollectionRepository.php
++++ b/src/Collections/CollectionRepository.php
+@@ -78,4 +78,13 @@ public static function bindings(): array
+             CollectionContract::class => Collection::class,
+         ];
+     }
++
++    public function updateEntryOrder(CollectionContract $collection, $ids = null)
++    {
++        $collection->queryEntries()
++            ->get()
++            ->each(function ($entry) {
++                $entry->save();
++            });
++    }
+ }
+diff --git a/src/Entries/Entry.php b/src/Entries/Entry.php
+index e2fff28..cccb481 100644
+--- a/src/Entries/Entry.php
++++ b/src/Entries/Entry.php
+@@ -41,6 +41,10 @@ public function toModel()
+             $data['blueprint'] = $this->blueprint;
+         }
+
++        if ($this->hasStructure()) {
++            $data['order'] = $this->order();
++        }
++
+         return $class::findOrNew($this->id())->fill([
+             'id'         => $this->id(),
+             'origin_id'  => $this->origin()?->id(),
+diff --git a/src/Entries/EntryQueryBuilder.php b/src/Entries/EntryQueryBuilder.php
+index 8e94f2b..61da898 100644
+--- a/src/Entries/EntryQueryBuilder.php
++++ b/src/Entries/EntryQueryBuilder.php
+@@ -63,6 +63,24 @@ public function get($columns = ['*'])
+         return parent::get($columns);
+     }
+
++    public function orderBy($field, $direction = 'asc')
++    {
++        if ($field == 'order') {
++
++            // get around wrapJsonSelector being a protected method (sigh)
++            $grammar = $this->builder->getGrammar();
++            $reflector = new \ReflectionObject($grammar);
++            $method = $reflector->getMethod('wrapJsonSelector');
++            $method->setAccessible(true);
++            $field = $method->invoke($grammar, 'data->order');
++
++            // cast as real - this will work on mysql, postgres and sqlite
++            return $this->builder->orderByRaw("CAST({$field} AS REAL) ".($direction == 'asc' ? 'ASC' : 'DESC'));
++        }
++
++        return parent::orderBy($field, $direction);
++    }
++
+     public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+     {
+         $this->addTaxonomyWheres();
