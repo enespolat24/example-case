@@ -26,7 +26,7 @@ return [
 
     'entries' => [
         'driver' => 'eloquent',
-        'model'  => \Statamic\Eloquent\Entries\EntryModel::class,
+        'model' => \Statamic\Eloquent\Entries\UuidEntryModel::class,
         'entry'  => \Statamic\Eloquent\Entries\Entry::class,
     ],
 
