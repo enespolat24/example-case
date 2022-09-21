@@ -1,0 +1,20 @@
+<div class="new col-md-9 offset-md-1 anim image-anim z-index-4" >
+    <div class="card border-0 h-100">
+        <figure>
+            <img class="w-100 mid-news" src="https://st.depositphotos.com/1031343/3027/v/950/depositphotos_30273183-stock-illustration-example-stamp.jpg" alt="" />
+        </figure>
+        <div class="card-body pl-lg-9 pl-5 pr-0 pt-5">
+            {{# {{ news_tags }}
+                <div class="text-secondary mb-2 d-block font-s-12px">{{ title }}</div>
+            {{ /news_tags }} #}}
+            <h2 class="card-title mb-3 col-lg-6 px-0">{{ title }}</h2>
+            <p class="card-text mb-md-5 mb-4 col-lg-8 px-0 max-w-777px">{{ summary }}</p>
+            {{if site == "tr"}}
+            <a class="outline-btn red font-weight-bold d-inline-block" href="{{ url }}">Ayrıntılı Bilgi</a>
+            {{endif}}
+            {{if site == "en"}}
+            <a class="outline-btn red font-weight-bold d-inline-block" href="{{ url }}">More Information</a>
+            {{endif}}
+        </div>
+    </div>
+</div>

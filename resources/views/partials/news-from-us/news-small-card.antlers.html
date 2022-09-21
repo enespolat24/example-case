@@ -1,0 +1,19 @@
+<div data-aos="fade-up"  class="new col-md-4 offset-md-1 mb-md-0 mb-9">
+    <div data-aos="fade-up" class="card border-0 h-auto {{ if count <= 2 }}loader image-anim{{ /if }}">
+        <img class="card-img-top h-100 rounded-0" src="https://st.depositphotos.com/1031343/3027/v/950/depositphotos_30273183-stock-illustration-example-stamp.jpg" height="200" width="200" alt="Card image cap" />
+        <div class="card-body pl-lg-9 pl-5 pr-0 pt-5">
+            {{# {{ news_tags }}
+                <div class="text-secondary mb-2 d-block font-s-12px">{{ title }}</div>
+            {{ /news_tags }} #}}
+
+            <h2 class="card-title mb-3 max-w-355px line-h-1-3 letter-spacing-002">{{ title }}</h2>
+            <p class="card-text mb-md-5 mb-4 max-w-386px">{{ summary }}</p>
+            {{if site == "tr"}}
+            <a class="outline-btn red font-weight-bold d-inline-block" href="{{ url }}">Ayrıntılı Bilgi</a>
+            {{endif}}
+            {{if site == "en"}}
+            <a class="outline-btn red font-weight-bold d-inline-block" href="{{ url }}">More Information</a>
+            {{endif}}
+        </div>
+    </div>
+</div>

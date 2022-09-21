@@ -1,0 +1,17 @@
+title: News
+sites:
+  - tr
+  - en
+template: templates/news-detail
+layout: layout
+taxonomies:
+  - news_tags
+revisions: false
+route: 'news-from-us/{slug}'
+sort_dir: asc
+date_behavior:
+  past: public
+  future: private
+structure:
+  root: false
+  max_depth: 1

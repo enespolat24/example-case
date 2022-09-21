@@ -1,0 +1,13 @@
+{{if site =="en"}}
+<p class="font-weight-bold text-secondary font-s-14px">Share on Social Media !</p>
+{{elseif site=="tr"}}
+<p class="font-weight-bold text-secondary font-s-14px">Sosyal Medyada Paylaş!</p>
+{{endif}}
+<ul class="list-inline d-flex social-media">
+    {{ company:social_media }}
+        <li class="mr-5">
+            <a class="text-secondary" href="{{ url }}"><i class="{{ icon_class }}"></i></a>
+        </li>
+    {{ /company:social_media }}
+
+</ul>

@@ -1,0 +1,18 @@
+<div class="col-md-4 offset-md-1 mb-md-0 mb-5">
+    <div class="card border-0">
+        <img class="card-img-top rounded-0 also-like-img" src="{{ thumbnail }}" alt="Card image cap" />
+        <div class="card-body pl-lg-9 pl-5 pr-0 pt-5">
+            {{ news_tags }}
+                <div class="text-secondary mb-2 d-block font-s-12px">{{ title }}</div>
+            {{ /news_tags }}
+            <h2 class="card-title mb-3 max-w-355px line-h-1-3 letter-spacing-002">{{ title }}</h2>
+            <p class="card-text mb-md-5 mb-4 max-w-386px">{{ summary }}</p>
+            {{if site == "tr"}}
+            <a class="outline-btn red font-weight-bold d-inline-block" href="{{ url }}">Ayrıntılı Bilgi</a>
+            {{endif}}
+            {{if site == "en"}}
+            <a class="outline-btn red font-weight-bold d-inline-block" href="{{ url }}">More Information</a>
+            {{endif}}
+        </div>
+    </div>
+</div>
